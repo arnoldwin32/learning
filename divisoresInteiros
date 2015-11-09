@@ -1,0 +1,102 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+#  primos.py 
+"""
+	Usar funções, matrizes etc.
+	Objetivo: Encontrar todos os divisores positivos de um número
+"""
+
+#definindo a funcao verificaPrimo
+def verificaPrimo(proximo):
+	primo = True;contador = 0;resto = 0;divisoesInteiras = 0
+	contador = proximo; quociente = 0
+	#print("Imprimindo o numero %d"%(contador))
+	while contador >= 1:
+		resto = proximo % contador
+		quociente = proximo / contador
+		#print("%d : %d = %d resto: %d"%(proximo,contador,quociente,resto))
+		if resto == 0:
+			divisoesInteiras = divisoesInteiras + 1
+		contador = contador -1
+	#print('imprimindo divisoes inteiras %d'%(divisoesInteiras))
+	if divisoesInteiras == 2:
+		primo = True
+	else:
+		primo = False
+	divisoesInteiras = 0
+	contador = 0
+	resto = 0
+	return primo
+	
+def preenchePrimos(n):
+	contador = 1; proximo = 0;primos = [];
+	proximo = 1; numero = True
+	num = n 
+	while contador <= num:
+		#print("Mandando o numero %d para a funcao"%(contador))
+		numero = verificaPrimo(contador)
+		if numero == True:
+			#print("O numero %d eh primo"%(contador))
+			primos.append(contador)
+		"""else:
+			print("O numero %d nao eh primo"%(contador))
+			"""
+		contador += 1
+	return primos
+	
+def fatorar(num):
+	divisores = []; y = 0; dividendo = 0;quociente = 0; divisor = 0
+	divisores = preenchePrimos(num);fatoresPrimos = [];resto =0;i = 0
+	dividendo = num
+	while quociente != 1:
+		divisor = divisores[i]
+		resto = dividendo % divisor
+		if resto == 0:
+			quociente = dividendo / divisor
+			#print(" %d : %d = %d resto: %d"%(dividendo,divisor,quociente,resto))
+			dividendo = quociente
+			if quociente >= 1:
+				fatoresPrimos.append(divisor)
+		else:
+			i += 1
+	return(fatoresPrimos)
+	
+def extrairOcorrencias(x):
+	indice = 0; ocorrencias = 0;fatoresPrimos = [];tabela = []
+	fatoresPrimos = fatorar(x); numero = 0; j = 0;k = 0;linhas = 0
+	numero = fatoresPrimos[indice]
+	print(fatoresPrimos)
+	tabela.append([])
+	while indice < len(fatoresPrimos):
+		if numero == fatoresPrimos[indice]:
+			ocorrencias += 1
+			print("o numero %d ocorreu %d vez"%(numero,ocorrencias))
+			indice += 1
+			tabela[linhas].append(numero)
+		else:
+			linhas += 1
+			tabela.append([])
+			numero = fatoresPrimos[indice]
+			ocorrencias = 0
+	return tabela
+		
+		
+	
+def main():
+	x = 0; lista = [];i = 0;m = 0; y = True
+	x = int(input("Entre com um numero: "))
+	lista = extrairOcorrencias(x)
+	while i < len(lista):
+		print(len(lista[i]))
+		i += 1
+	"""while i < len(lista):
+		print("%d"%(lista[i]))
+		i+= 1
+	"""
+	#y = verificaPrimo(x)
+	return 0
+
+if __name__ == '__main__':
+	main()
+
