@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+#  calculaMeses.py
+#  
+#  Copyright 2015 Arnô Júnio de Almeida Morais <arnold@cozinha>
+"""
+	Algoritmo para calcular o dia da semana para qualquer data inserida
+	Usar funções, vetores e matrizes.
+"""
+def matrizMeses(y,inicial,final):
+	ano = []; i =0; j = 0;diferenca = 0;mesInicial = 0;mesFinal = 0;d =[]
+	meses = ['Janeiro','Fevereiro','Marco','Abril','Maio','Junho',
+	'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+	numeros = [1,2,3,4,5,6,7,8,9,10,11,12]
+	dias = [31,28,31,30,31,30,31,31,30,31,30,31]
+	ano.append(numeros)
+	ano.append(meses)
+	ano.append(dias)
+	if y == True:
+		ano[2][1] = 29
+	while j < len(ano[0]):
+		while i < len(ano):
+			#print(ano[i][j],'',end = '')
+			i += 1
+		print('')
+		i = 0	
+		j += 1
+	mesInicial = inicial
+	mesFinal = final
+	diferenca = (mesFinal - mesInicial)
+	i = mesInicial - 1
+	while i < len(meses) - diferenca:
+		d.append(meses[i])
+		i += 1
+	print(d)
+def verificaBissexto(ano):
+	resto = 0; bissexto = False
+	resto = ano % 4
+	if resto == 0:
+		bissexto = True
+	else:
+		bissexto = False
+	return bissexto
+def main():
+	x = 0; num = False;n = 8; m = 11
+	x = int(input("informe o ano: "))
+	num = verificaBissexto(x)
+	if num == True:
+		print("o ano de %d e bissexto"%(x))
+		
+	else:
+		print("o ano de %d nao e bissexto"%(x))
+	matrizMeses(num,n,m)
+	return 0
+
+if __name__ == '__main__':
+	main()
+
